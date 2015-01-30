@@ -1,0 +1,22 @@
+
+<div class="row">
+
+  <div class="col-md-6 col-md-offset-3">
+    
+    
+      <h3>Add Students</h3>
+     <%= simple_form_for @student do |f| %>
+  <%= f.input :name %>
+  <%= f.input :sex, collection: ["Male", "Female"] %>
+  <%= f.input :age, collection: 15..100 %>
+  <%= f.input :dob %> 
+  <%= f.input :current_school %>
+  <%= f.input :current_level %>
+  <%= f.input :country,  priority: [ "Singapore" ] %>
+  <%= f.input :sat_score %>
+  <%= f.input :applied_colleges, collection: applied_colleges, as: :check_boxes %> 
+  <%= f.button :submit %>
+<% end %>
+      </div>
+</div>
+

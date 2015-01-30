@@ -1,0 +1,14 @@
+<div class="container" >
+<h1>College List</h1>
+
+    <% @colleges.each do |college| %> 
+    <br>
+      <blockquote>
+        <p><%= college.name %></p>
+      </blockquote>
+      <button class="primary"><%= link_to "Edit",edit_college_path(college) %></button>
+    <button class="primary"><%= link_to "Delete",college_path(college), method: :delete %></button>
+    <button class="primary"><%= link_to "Show Profile",college_path(college) %></button>
+<% end %>
+
+</div>

@@ -1,0 +1,14 @@
+<div class="container" >
+<h1>Mentor List</h1>
+
+    <% @mentors.each do |mentor| %> 
+    <br>
+      <blockquote>
+        <p><%= mentor.name %></p>
+      </blockquote>
+      <button class="primary"><%= link_to "Edit",edit_mentor_path(mentor) %></button>
+    <button class="primary"><%= link_to "Delete",mentor_path(mentor), method: :delete %></button>
+    <button class="primary"><%= link_to "Show Profile",mentor_path(mentor) %></button>
+<% end %>
+
+</div>

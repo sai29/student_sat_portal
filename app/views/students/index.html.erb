@@ -1,0 +1,16 @@
+<div class="container" >
+<h1>Student List</h1>
+
+    <% @students.each do |student| %> 
+    <br>
+      <blockquote>
+        <p><%= student.name %></p>
+      </blockquote>
+      <button class="btn btn-default btn-sm"><%= link_to "Edit",edit_student_path(student) %></button>
+    <button class="btn btn-default btn-sm"><%= link_to "Delete",student_path(student), method: :delete %></button>
+    <button class="btn btn-default btn-sm"><%= link_to "Show Profile",student_path(student) %></button>
+<% end %>
+
+</div>
+
+
