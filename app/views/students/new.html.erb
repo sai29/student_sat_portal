@@ -14,8 +14,10 @@
   <%= f.input :current_level %>
   <%= f.input :country,  priority: [ "Singapore" ] %>
   <%= f.input :sat_score %>
-  <%= f.input :applied_colleges, collection: applied_colleges, as: :check_boxes %> 
+  <%= f.input :applied_colleges, collection: ["MIT","HARVARD"],group_method: :id, as: :check_boxes %> 
+    <%= f.input :current_mentor, collection: Mentor.all, group_method: :name, as: :select %> 
   <%= f.button :submit %>
+
 <% end %>
       </div>
 </div>

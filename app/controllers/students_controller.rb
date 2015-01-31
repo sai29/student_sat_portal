@@ -5,9 +5,25 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find_by(id: params[:id])
+    @mentor = Mentor.find_by(id: @student.current_mentor)
+    @colleges = []
+   @student.applied_colleges.each do |var|
+     @colleges << var.to_i
+    end
+    @college = College.find_by(id:@colleges[0])
+    @college_list = []
+    @colleges.each do |var|
+      @college_list << College.find_by(id:var)
+    end
+    @college_list.delete_at(@college_list.length-1)
   end
+
   def new
     @student = Student.new
+    @college = []
+    College.all.each do |var|
+      @college << var.name
+      end
   end
 
   def create
@@ -44,6 +60,6 @@ class StudentsController < ApplicationController
 
   private
     def student_params
-      params.require(:student).permit(:name, :sex, :age, :dob, :current_school, :current_level, :country, :sat_score)
+      params.require(:student).permit(:name, :sex, :age, :dob, :current_school, :current_level, :country, :sat_score,:current_mentor, :applied_colleges => [])
     end
 end

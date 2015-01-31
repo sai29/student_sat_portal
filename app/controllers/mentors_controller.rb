@@ -4,7 +4,7 @@ class MentorsController < ApplicationController
   end
 
   def show
-    @mentor = Mentor.find_by[id: params[:id]]
+    @mentor = Mentor.find_by(id: params[:id])
   end
 
   def new

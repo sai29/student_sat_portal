@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150128071057) do
+ActiveRecord::Schema.define(version: 20150131123428) do
 
   create_table "colleges", force: true do |t|
     t.string   "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20150128071057) do
     t.integer  "tution_fees"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "student_list"
   end
 
   create_table "mentors", force: true do |t|
@@ -44,7 +45,11 @@ ActiveRecord::Schema.define(version: 20150128071057) do
     t.integer  "sat_score"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "applied_colleges"
+    t.integer  "current_mentor_id"
+    t.string   "applied_colleges"
+    t.string   "current_mentor"
   end
+
+  add_index "students", ["current_mentor_id"], name: "index_students_on_current_mentor_id"
 
 end

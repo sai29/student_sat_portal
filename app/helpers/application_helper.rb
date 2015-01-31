@@ -1,5 +1,9 @@
 module ApplicationHelper
 	def applied_colleges
-		college_list = College.all
+		@colleges = []
+		College.each do |var|
+			@colleges << var.name
+		end
+		@colleges
 	end
 end

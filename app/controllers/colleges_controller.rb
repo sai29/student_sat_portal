@@ -36,7 +36,7 @@ class CollegesController < ApplicationController
   end
 
   def destroy
-    @college = College.find_by(id: params[:id])
+    @college = College.find(params[:id])
     @college.destroy
   end
 
