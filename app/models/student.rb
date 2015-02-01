@@ -5,13 +5,24 @@ class Student < ActiveRecord::Base
 	validates :age, presence: true, numericality: { lesser_than_or_equal_to: 120, only_integer: true}
 	validates :sat_score, presence: true, numericality: {lesser_than_or_equal_to: 1600, only_integer: true}
 
-	def college_id_to_college_name(applied_colleges,colleges)
+	def self.college_id_to_college_name(applied_colleges)
+		colleges = []
 		applied_colleges.each do |var|
      colleges << var.to_i
     end
     @college_list = []
-    @colleges.each do |var|
+    colleges.each do |var|
       @college_list << College.find_by(id:var)
     end
+    @college_list.delete_at(@college_list.length-1)
+    @college_list
+	end
+
+	def self.save_applied_student_id_to_student_joined_column_for_college(student_id,college_list)
+		p student_id
+    college_list.each do |college|
+      college.student_list << student_id
+    end
+
 	end
 end

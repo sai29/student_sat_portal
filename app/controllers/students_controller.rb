@@ -6,16 +6,7 @@ class StudentsController < ApplicationController
   def show
     @student = Student.find_by(id: params[:id])
     @mentor = Mentor.find_by(id: @student.current_mentor)
-    @colleges = []
-   @student.applied_colleges.each do |var|
-     @colleges << var.to_i
-    end
-    @college = College.find_by(id:@colleges[0])
-    @college_list = []
-    @colleges.each do |var|
-      @college_list << College.find_by(id:var)
-    end
-    @college_list.delete_at(@college_list.length-1)
+    @college_list = Student.college_id_to_college_name(@student.applied_colleges)
   end
 
   def new
@@ -28,12 +19,16 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
+
     if @student.save
       flash[:notice] = "A new student was created"
       redirect_to students_url
     else
       redirect_to new_student_url
     end
+     @college_list = Student.college_id_to_college_name(@student.applied_colleges)
+     p @student.id
+    Student.save_applied_student_id_to_student_joined_column_for_college(@student.id, @college_list)
   end
 
   def edit
@@ -46,6 +41,7 @@ class StudentsController < ApplicationController
       flash[:notice] = "The Student profile was updated!"
     else
       redirect_to edit_students_path
+
     end
   end
 
